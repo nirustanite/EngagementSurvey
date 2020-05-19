@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {fetchQuestion} from '../../store/actions';
 import {Link} from 'react-router-dom';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 
 class QuestionContainer extends Component{
  
