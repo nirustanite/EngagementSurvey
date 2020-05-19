@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {fetchQuestion} from '../../store/actions';
 import {Link} from 'react-router-dom';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 class QuestionContainer extends Component{
  
@@ -53,9 +55,9 @@ class QuestionContainer extends Component{
        console.log(this.state)
         return(
             <React.Fragment>
-              
+            
                {this.props.question && 
-                <div>
+                <div className="question-container">  
                   <p>{this.props.question.description}</p>
                   <div>
                     {this.state.id !== 1 && 
@@ -70,6 +72,7 @@ class QuestionContainer extends Component{
                     </Link>}
                   </div>
                 </div>}
+            
             </React.Fragment>
         )
     }
@@ -82,11 +85,5 @@ const mapStateToProps = (state) => {
         question: state.question
     }
 }
-
-// const mapDispatchToProps = dispatch => {
-//   return{
-//     fetchQuestion: () => dispatch(actions.fetchQuestion(this.state.id))
-//   }
-// }
 
 export default connect(mapStateToProps,{fetchQuestion})(QuestionContainer)

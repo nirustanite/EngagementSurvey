@@ -6,6 +6,26 @@ import {Link} from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import './HomePage.css';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+
+const useStyles = theme => ({
+   heading:{
+        paddingTop:"40px",
+        textAlign: "center"
+   },
+   subheading:{
+        textAlign: "center",
+        paddingTop: "20px",
+   },
+   button:{
+      alignItems:"center",
+      paddingTop: "30px",
+   }
+  });
+
 
 class HomePage extends React.Component{
 
@@ -21,20 +41,18 @@ class HomePage extends React.Component{
     }
 
     render(){
+        const { classes } = this.props;
         return(
             <React.Fragment>
-                <div className="container">
-                    <Header />
                     <div className="body-container">
-                        <h1> Engagement Survey</h1>
-                        <img src={logo} alt="logo" />
-                        <p>Assesments</p>
-                    </div>
-                    <Link to={`/questions/${this.state.currentQuestionIndex}`} >
-                    <button> Start Assessment</button></Link>
-                    <Footer />
-                </div>
-                
+                        <Typography variant="h3" component="h3" className={classes.heading}> Engagement Satisfaction</Typography>
+                        <Typography variant="h4" component="h4" className={classes.subheading}> Assessment</Typography>
+                        <Typography variant="h6" component="h6" className={classes.heading}> 1. Don't refresh the page while taking the Assessment</Typography>
+                        <Typography variant="h6" component="h6" className={classes.subheading}> 2. Use Previous Button for going back a question</Typography>
+                        <br />
+                        <Link to={`/questions/${this.state.currentQuestionIndex}`} >
+                        <Button variant="contained" className="button" color="primary"> Start Assessment</Button></Link>
+                    </div> 
             </React.Fragment>
         )
     }
@@ -53,4 +71,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(HomePage)
+export default connect(mapStateToProps,mapDispatchToProps)(withStyles(useStyles)(HomePage))
