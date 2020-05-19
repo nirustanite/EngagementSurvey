@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import questionsList from './questionsList';
-import questiontracker from './questiontracker';
+import questionCount from './questionCount';
+import question from './question';
 
 export default combineReducers({
-    questiontracker,
-    questionsList,
+    question,
+    questionCount,
 })

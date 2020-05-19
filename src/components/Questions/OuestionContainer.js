@@ -1,40 +1,92 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../store/actions';
-import Question from './Question';
-import { timingSafeEqual } from 'crypto';
+import {fetchQuestion} from '../../store/actions';
+import {Link} from 'react-router-dom';
 
 class QuestionContainer extends Component{
-    constructor(props){
-        super(props);
-        this.state={
-            currentQuestionIndex: 1,
-        }
+ 
+    
+     constructor(props){
+       super(props)
+       this.state={
+        id: Number(this.props.match.params.id)
+      }
+     }
+    
+    displayQuestion(questionId){
+      this.props.fetchQuestion(questionId);
+    }
+
+    handleNextClick = () => {
+      const newId = this.state.id + 1;
+      if(newId <= this.props.count){
+      this.displayQuestion(newId);
+      this.setState({
+        id: newId
+      })}
+
+    }
+
+    handlePrevClick = () => {
+      const newId = this.state.id - 1;
+      if(newId < this.props.count){
+      this.displayQuestion(newId);
+      this.setState({
+        id: newId
+      })}
+    }
+
+    handleCLickbutton = () => {
+      this.props.history.push('/');
     }
 
     componentDidMount(){
-       this.props.fetchQuestions();
+      console.log("inside Question Container")
+      console.log(this.props.match.params.id)
+      if(Number(this.props.match.params.id) <= this.props.count){
+         this.displayQuestion(Number(this.props.match.params.id))
+      }
+       
     }
 
     render(){
+       console.log(this.state)
         return(
             <React.Fragment>
-               <Question questionList={this.props.questions} />
+              
+               {this.props.question && 
+                <div>
+                  <p>{this.props.question.description}</p>
+                  <div>
+                    {this.state.id !== 1 && 
+                       <Link to={`/questions/${this.state.id - 1}`}>
+                       <button onClick={this.handlePrevClick}>Prev</button></Link>
+                    }
+
+                    {this.state.id === this.props.count && <button onClick={this.handleCLickbutton}>Submit</button>}
+
+                    {this.state.id < this.props.count && <Link to={`/questions/${this.state.id + 1}`}>
+                      <button onClick={this.handleNextClick}>Next</button>
+                    </Link>}
+                  </div>
+                </div>}
             </React.Fragment>
         )
     }
 }
 
 const mapStateToProps = (state) => {
+   console.log(state)
     return{
-        questions: state.questionsList
+        count: state.questionCount,
+        question: state.question
     }
 }
 
-const mapDispatchToProps = dispatch => {
-  return{
-    fetchQuestions: () => dispatch(actions.fetchQuestions())
-  }
-}
+// const mapDispatchToProps = dispatch => {
+//   return{
+//     fetchQuestion: () => dispatch(actions.fetchQuestion(this.state.id))
+//   }
+// }
 
-export default connect(mapStateToProps,mapDispatchToProps)(QuestionContainer)
+export default connect(mapStateToProps,{fetchQuestion})(QuestionContainer)
