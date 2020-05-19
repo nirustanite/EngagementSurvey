@@ -18,7 +18,7 @@ export default function Footer(){
     return(
         <React.Fragment>
         <CssBaseline />
-        <footer className={classes.footer}>
+        <footer className={classes.footer} color="primary">
         </footer>
         </React.Fragment>
     )
