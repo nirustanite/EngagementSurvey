@@ -1,9 +1,9 @@
 import * as actionTypes from '../actions/actionTypes';
 
-const reducer = (state=[], action={}) =>{
+const reducer = (state={}, action={}) =>{
     switch(action.type){
-        case actionTypes.QUESTIONS_LIST:
-            return action.data
+        case actionTypes.QUESTION:
+           return action.data
         default:
             return state
     }

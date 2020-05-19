@@ -1,7 +1,11 @@
 import { takeEvery } from "redux-saga/effects";
 import * as actionTypes from "../actions/actionTypes";
-import { getQuestions } from './questionsaga';
+import { getQuestionCount, getQuestion } from './questionsaga';
 
-export function* watchQuestions(){
-    yield takeEvery(actionTypes.FETCH_QUESTIONS, getQuestions);
+export function* watchgetQuestionCount(){
+    yield takeEvery(actionTypes.FETCH_QUESTION_COUNT, getQuestionCount);
+}
+
+export function* watchgetQuestion(){
+    yield takeEvery(actionTypes.FETCH_QUESTION, getQuestion);
 }
