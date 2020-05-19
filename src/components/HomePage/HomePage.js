@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
 import {logo} from '../../assets/logo.png';
 import {Link} from 'react-router-dom';
+import Header from '../Header/Header';
 
 class HomePage extends React.Component{
 
@@ -20,12 +21,13 @@ class HomePage extends React.Component{
     render(){
         return(
             <React.Fragment>
+                <Header />
                 <div>
                     <h1> Engagement Survey</h1>
                     <img src={logo} alt="logo" />
                     <p>Assesments</p>
                 </div>
-               <Link to={`/questions/${this.state.currentQuestionIndex}`} >
+                 <Link to={`/questions/${this.state.currentQuestionIndex}`} >
                   <button> Start Assessment</button></Link>
             </React.Fragment>
         )
