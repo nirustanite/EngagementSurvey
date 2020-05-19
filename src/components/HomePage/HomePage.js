@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
 import {logo} from '../../assets/logo.png';
 import {Link} from 'react-router-dom';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 import './HomePage.css';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
